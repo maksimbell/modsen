@@ -2,10 +2,11 @@ import React from 'react'
 
 const Book = ({bookInfo}) => {
   return (
-    <>
-      <h3>{bookInfo.volumeInfo.title}</h3>
-      {bookInfo.volumeInfo.imageLinks?.thumbnail && <img src={bookInfo.volumeInfo.imageLinks.thumbnail} alt={bookInfo.volumeInfo.title}/>}
-    </>
+    <div className="bookItem">
+      {bookInfo.volumeInfo.imageLinks?.thumbnail && 
+        <img src={bookInfo.volumeInfo.imageLinks.smallThumbnail} alt={bookInfo.volumeInfo.title}/>}
+      <h5>{bookInfo.volumeInfo.title}</h5>
+    </div>
   )
 }
 

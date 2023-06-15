@@ -14,14 +14,15 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #f7f3eb;
+  /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 20px;
+  /* color: white; */
 }
 
 .App-link {
@@ -35,4 +36,32 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.App-main{
+  padding: 70px;
+  display: flex;
+  flex-wrap: wrap;
+  /* gap: 30px; */
+  /* gap: 5%; */
+  justify-content: flex-start;
+}
+
+.headerSelects{
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+}
+
+.bookItem{
+  width: 25%;
+  box-sizing: border-box;
+  border: 1px solid rgb(243, 211, 211);
+  /* width: 125px; */
+  height: 100%;
+}
+
+img {
+  /* width: 100%; */
+  height: 200px;
 }
