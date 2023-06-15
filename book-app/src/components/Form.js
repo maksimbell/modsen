@@ -1,6 +1,5 @@
 import React, {useState,} from 'react'
 
-
 const categories = ['all', 'art', 'biography', 'computers', 'history', 'medical', 'poetry']
 const sortings = ['relevance', 'newest']
 
@@ -10,16 +9,6 @@ const Form = ({searchBooks}) => {
     category: categories[0],
     sorting: sortings[0], 
   })
-
-  // useEffect(() => {
-  //   setParams(
-  //     {
-  //       query: '',
-  //       category: categories[4],
-  //       sorting: sortings[1], 
-  //     }
-  //   )
-  // }, [])
   
   const onQueryChange = (event) => setParams({...searchParams, query: event.target.value})
   const onCategoryChange = (event) => setParams({...searchParams, category: event.target.value})
