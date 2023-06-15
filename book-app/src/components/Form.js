@@ -26,14 +26,13 @@ const Form = ({searchBooks}) => {
   const onSortChange = (event) => setParams({...searchParams, sorting: event.target.value})
 
   return (
-    <header>
+    <>
         <h1>Search for books</h1>
         <input 
           type="search" 
           onChange={onQueryChange} 
           value={searchParams.query}
         />
-
         <button type="submit" onClick={() => searchBooks(searchParams)}>Search</button>
 
         <h2>Categories</h2>
@@ -45,7 +44,7 @@ const Form = ({searchBooks}) => {
         <select id="sortings" name="sortings" onChange={onSortChange} value={searchParams.sort}>
           {sortings.map((sort, index) => <option value={sort} key={index}>{sort}</option>)}
         </select>
-    </header>
+    </>
   )
 }
 
