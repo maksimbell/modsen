@@ -12,7 +12,7 @@ function App() {
 
   function searchBooks(params){
     console.log(params)
-    fetch(`https://www.googleapis.com/books/v1/volumes?q=${params.query}&key=AIzaSyBca5LLs3pmiQ1cjNMhqIFoaQaupBS64d0`)
+    fetch(`https://www.googleapis.com/books/v1/volumes?q=${params.query}&key=${process.env.REACT_APP_API_KEY}`)
       .then(res => res.json())
       .then(obj => {
         console.log(obj)
@@ -27,7 +27,7 @@ function App() {
       </header>
       <main>
         {result.map(bookInfo => (
-          <Book bookInfo={bookInfo}/>
+          <Book bookInfo={bookInfo} key={bookInfo.id}/>
         ))}
       </main>
     </div>
