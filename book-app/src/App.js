@@ -1,9 +1,9 @@
-import './App.css';
 import React, {useState, useEffect} from 'react'
 import Book from './components/Book.js'
 import SearchBar from './components/SearchBar.js'
 import CatergoryFilter from './components/CategoryFilter.js'
 import SortSelect from './components/SortSelect.js'
+import './App.css';
 
 const categories = ['all', 'art', 'biography', 'computers', 'history', 'medical', 'poetry']
 const sortings = ['relevance', 'newest']
@@ -21,7 +21,7 @@ function App() {
     console.log(query)
     fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}&key=${process.env.REACT_APP_API_KEY}`)
       .then(res => res.json())
-      .then(obj => {
+      .then(obj => {//change name
         console.log(obj)
         setResult(obj.items)
       })

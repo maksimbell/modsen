@@ -13,7 +13,11 @@ const SearchBar = ({searchBooks}) => {
         onChange={handleQueryChange} 
         value={query}
       />
-      <button type="submit" onClick={() => searchBooks(query)}>Search</button>
+      <button type="submit" onClick={() => {
+          if(query){
+            searchBooks(query)
+          }
+      }}>Search</button>
     </div>
   )
 }
