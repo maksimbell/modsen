@@ -13,7 +13,7 @@ function App() {
   const [sortingId, setSorting] = useState(0)
 
   useEffect(() => {
-    console.log(result)
+    // console.log(result)
   }, [result])
 
   // useEffect(() => {
@@ -24,7 +24,8 @@ function App() {
   function searchBooks(query){
     console.log(query)
 
-    request(filterId, sortingId, query)
+    request(filterId, sortingId, constants.DEFAULT_START_INDEX, 
+      constants.DEFAULT_MAX_RESULTS, query)
       .then(res => res.json())
       .then(lib => {
         setResult(lib)
@@ -46,15 +47,20 @@ function App() {
     console.log('id:', id)
     setSorting(id)
 
-    request(id, sortingId)
+    request(filterId, id)
       .then(res => res.json())
       .then(lib => {
         setResult(lib)
       })
   }
 
-  function loadMore(){
-    console.log(1)
+  function onLoadMore(){
+    request(filterId, sortingId, result.items.length, constants.DEFAULT_MAX_RESULTS)
+      .then(res => res.json())
+      .then(lib => {
+        console.log(lib)
+        setResult({...result, items: [...result.items, ...lib.items], })
+      })
   }
 
   return (
@@ -71,7 +77,7 @@ function App() {
         {result.items?.map((bookInfo, index) => (
           <Book bookInfo={bookInfo} key={index}/>
         ))}
-        <button onClick={loadMore}>Load more</button>
+        <button onClick={onLoadMore}>Load more</button>
       </main>
     </div>
   );
