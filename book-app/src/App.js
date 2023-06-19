@@ -5,34 +5,56 @@ import SearchBar from './components/SearchBar'
 import CatergoryFilter from './components/CategoryFilter'
 import SortSelect from './components/SortSelect'
 import * as constants from './constants'
+import request from './api/BooksAPI'
 
 function App() {
   const [result, setResult] = useState([])
-  const [filter, setFilter] = useState(0)
-  const [sorting, setSorting] = useState(0)
+  const [filterId, setFilter] = useState(0)
+  const [sortingId, setSorting] = useState(0)
 
   useEffect(() => {
     console.log(result)
   }, [result])
 
+  // useEffect(() => {
+  //   if(query)
+  //     request
+  // }, [filterId, sortingId])
+
   function searchBooks(query){
     console.log(query)
-    fetch(`${constants.API_URL}?q=${query}&key=${process.env.REACT_APP_API_KEY}`)
+
+    request(filterId, sortingId, query)
       .then(res => res.json())
       .then(lib => {
-        console.log(lib)
-        setResult(lib.items)
+        setResult(lib)
       })
   }
 
   function handleFilterChange(id){
     console.log('id:', id)
     setFilter(id)
+
+    request(id, sortingId)
+      .then(res => res.json())
+      .then(lib => {
+        setResult(lib)
+      })
   }
 
   function handleSortingChange(id){
     console.log('id:', id)
     setSorting(id)
+
+    request(id, sortingId)
+      .then(res => res.json())
+      .then(lib => {
+        setResult(lib)
+      })
+  }
+
+  function loadMore(){
+    console.log(1)
   }
 
   return (
@@ -45,9 +67,11 @@ function App() {
         </div>
       </header>
       <main className="App-main">
-        {result.map(bookInfo => (
-          <Book bookInfo={bookInfo} key={bookInfo.id}/>
+        <h3>{result.items && `Found ${result?.totalItems} results`}</h3>
+        {result.items?.map((bookInfo, index) => (
+          <Book bookInfo={bookInfo} key={index}/>
         ))}
+        <button onClick={loadMore}>Load more</button>
       </main>
     </div>
   );
