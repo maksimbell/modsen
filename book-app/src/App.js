@@ -1,12 +1,10 @@
 import './App.css';
 import React, {useState, useEffect} from 'react'
-import Book from './components/Book.js'
-import SearchBar from './components/SearchBar.js'
-import CatergoryFilter from './components/CategoryFilter.js'
-import SortSelect from './components/SortSelect.js'
-
-const categories = ['all', 'art', 'biography', 'computers', 'history', 'medical', 'poetry']
-const sortings = ['relevance', 'newest']
+import Book from './components/Book'
+import SearchBar from './components/SearchBar'
+import CatergoryFilter from './components/CategoryFilter'
+import SortSelect from './components/SortSelect'
+import * as constants from './constants'
 
 function App() {
   const [result, setResult] = useState([])
@@ -19,11 +17,11 @@ function App() {
 
   function searchBooks(query){
     console.log(query)
-    fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}&key=${process.env.REACT_APP_API_KEY}`)
+    fetch(`${constants.API_URL}?q=${query}&key=${process.env.REACT_APP_API_KEY}`)
       .then(res => res.json())
-      .then(obj => {
-        console.log(obj)
-        setResult(obj.items)
+      .then(lib => {
+        console.log(lib)
+        setResult(lib.items)
       })
   }
 
@@ -42,8 +40,8 @@ function App() {
       <header className="App-header">
         <SearchBar searchBooks={searchBooks}/>
         <div className="headerSelects">
-          <CatergoryFilter categories={categories} onChange={handleFilterChange}/>
-          <SortSelect sortings={sortings} onChange={handleSortingChange}/>
+          <CatergoryFilter categories={constants.CATEGORIES} onChange={handleFilterChange}/>
+          <SortSelect sortings={constants.SORTINGS} onChange={handleSortingChange}/>
         </div>
       </header>
       <main className="App-main">
