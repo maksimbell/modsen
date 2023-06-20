@@ -2,7 +2,8 @@
     width: 290px;
     height: 360px;
     box-sizing: border-box;
-    background-color: rgb(243, 243, 243);
+    /* background-color: rgb(243, 243, 243); */
+    background-color: rgb(228, 238, 232);
     margin: 20px auto;
 }
 

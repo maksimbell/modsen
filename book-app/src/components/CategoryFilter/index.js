@@ -1,4 +1,5 @@
 import React from 'react'
+import './style.css'
 
 const CategoryFilter = ({categories, onChange}) => {
   
@@ -9,9 +10,10 @@ const CategoryFilter = ({categories, onChange}) => {
   }
 
   return (
-    <div>
-      <h3>Categories</h3>
-      <select id="categories" name="categories" onChange={handleCategoryChange}>
+    <div className="bookSelect">
+      <h3 className="bookSelect__name">Categories</h3>
+      <select id="categories" name="categories" 
+        className="bookSelect__select" onChange={handleCategoryChange} >
         {categories.map((cat, index) => <option value={cat} key={index}>{cat}</option>)}
       </select>
     </div>
