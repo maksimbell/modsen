@@ -1,11 +1,14 @@
 import React from 'react'
+import defaultBook from '../../assets/default.jpg'
 
-const Book = ({bookInfo}) => {
+const Book = ({volumeInfo}) => {
+  
   return (
     <div className="bookItem">
-      {bookInfo.volumeInfo.imageLinks?.thumbnail && 
-        <img src={bookInfo.volumeInfo.imageLinks.smallThumbnail} alt={bookInfo.volumeInfo.title}/>}
-      <h5>{bookInfo.volumeInfo.title}</h5>
+      <img src={volumeInfo.imageLinks?.thumbnail ? 
+        volumeInfo.imageLinks.smallThumbnail : defaultBook} 
+        alt={volumeInfo.title}/>
+      <h5>{volumeInfo.title}</h5>
     </div>
   )
 }

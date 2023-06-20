@@ -13,7 +13,7 @@ function App() {
   const [sortingId, setSorting] = useState(0)
 
   useEffect(() => {
-    // console.log(result)
+    console.log(result)
   }, [result])
 
   // useEffect(() => {
@@ -74,9 +74,11 @@ function App() {
       </header>
       <main className="App-main">
         <h3>{result.items && `Found ${result?.totalItems} results`}</h3>
-        {result.items?.map((bookInfo, index) => (
-          <Book bookInfo={bookInfo} key={index}/>
-        ))}
+        <div className="App-main__content">
+          {result.items?.map((bookInfo, index) => (
+            <Book volumeInfo={bookInfo.volumeInfo} key={index}/>
+          ))}
+        </div>
         <button onClick={onLoadMore}>Load more</button>
       </main>
     </div>
