@@ -73,13 +73,15 @@ function App() {
         </div>
       </header>
       <main className="App-main">
-        <h3>{result.items && `Found ${result?.totalItems} results`}</h3>
-        <div className="App-main__content">
-          {result.items?.map((bookInfo, index) => (
-            <Book volumeInfo={bookInfo.volumeInfo} key={index}/>
-          ))}
+        <div className="Container">
+          <h3 className="App-main__results">{result.items && `Found ${result?.totalItems} results`}</h3>
+          <div className="App-main__content">
+            {result.items?.map((bookInfo, index) => (
+              <Book volumeInfo={bookInfo.volumeInfo} key={index}/>
+            ))}
+          </div>
+          {result.items && <button onClick={onLoadMore}>Load more</button>}
         </div>
-        <button onClick={onLoadMore}>Load more</button>
       </main>
     </div>
   );

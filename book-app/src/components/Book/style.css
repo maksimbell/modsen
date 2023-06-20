@@ -1,0 +1,33 @@
+.bookItem {
+    width: 290px;
+    height: 360px;
+    box-sizing: border-box;
+    background-color: rgb(243, 243, 243);
+    margin: 20px auto;
+}
+
+.bookItem__img {
+    height: 180px;
+    width: 120px;
+    margin: 25px 0 10px;
+    box-shadow: 5px 5px 5px rgb(57, 66, 70);
+}
+
+.bookItem__category {
+    text-decoration: underline;
+    opacity: .5;
+    font-size: 16px;
+}
+
+.bookItem__title {
+    opacity: 1;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.bookItem__author {
+    opacity: .5;
+    font-size: 15px;
+}
+
