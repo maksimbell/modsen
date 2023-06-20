@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import './style.css'
 
 const SearchBar = ({searchBooks}) => {
   const [query, setQuery] = useState('')
@@ -10,14 +11,16 @@ const SearchBar = ({searchBooks}) => {
   }
 
   return (
-    <div>
-      <h1>Search for books</h1>
+    <div className="searchBar">
+      <h1 className="searchBar__title">Search for books</h1>
       <input 
+        className="searchBar__input"
         type="search" 
         onChange={handleQueryChange} 
         value={query}
       />
-      <button type="submit" onClick={handleClick}>Search</button>
+      <button type="submit" onClick={handleClick}
+        className="searchBar__button">Search</button>
     </div>
   )
 }

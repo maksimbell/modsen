@@ -1,0 +1,12 @@
+.bookSelect__name{
+}
+
+.bookSelect__select{
+    margin-top: 20px;
+    border-radius: 0px;
+    font-size: 16px;
+    padding: 8px;
+    text-decoration: none;
+    white-space: normal;
+    border: 1px solid rgb(252, 252, 169);
+}

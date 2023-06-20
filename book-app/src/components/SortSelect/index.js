@@ -1,4 +1,5 @@
 import React from 'react'
+import './style.css'
 
 const SortSelect = ({sortings, onChange}) => {
 
@@ -9,9 +10,10 @@ const SortSelect = ({sortings, onChange}) => {
   }
 
   return (
-    <div>
-      <h3>Sorting by</h3>
-      <select id="sortings" name="sortings" onChange={handleSortingChange}>
+    <div className="bookSelect">
+      <h3 className="bookSelect__name">Sorting by</h3>
+      <select id="sortings" name="sortings" 
+        className="bookSelect__select" onChange={handleSortingChange}>
         {sortings.map((sort, index) => <option value={sort} key={index}>{sort}</option>)}
       </select>
     </div>
