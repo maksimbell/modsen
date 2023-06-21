@@ -2,8 +2,8 @@ import * as constants from '../constants'
 
 let prevQuery
 
-const request = (filterId, sortingId, startIndex = constants.DEFAULT_START_INDEX,
-    maxResults = constants.DEFAULT_MAX_RESULTS, query = prevQuery) => {
+export function requestVolume(filterId, sortingId, startIndex = constants.DEFAULT_START_INDEX,
+    maxResults = constants.DEFAULT_MAX_RESULTS, query = prevQuery) {
     prevQuery = query
 
     return fetch(`${constants.API_URL}` +
@@ -15,4 +15,6 @@ const request = (filterId, sortingId, startIndex = constants.DEFAULT_START_INDEX
         `&key=${process.env.REACT_APP_API_KEY}`)
 }
 
-export default request
+export function requestBook(id) {
+    return fetch(`${constants.API_URL}/${id}`)
+}

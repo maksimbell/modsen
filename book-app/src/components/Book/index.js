@@ -6,7 +6,7 @@ import './style.css';
 const Book = ({volumeInfo, id}) => {
   
   return (
-    <a href={`book/:${id}`} className="bookItem">
+    <a href={`book/${id}`} className="bookItem">
       <img src={volumeInfo.imageLinks?.thumbnail ? 
         volumeInfo.imageLinks.smallThumbnail : defaultBook} 
         alt={volumeInfo.title}

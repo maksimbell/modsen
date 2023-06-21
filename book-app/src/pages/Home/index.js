@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from 'react'
-import {Link} from 'react-router-dom';
 import Book from '../../components/Book'
 import SearchBar from '../../components/SearchBar'
 import CatergoryFilter from '../../components/CategoryFilter'
 import SortSelect from '../../components/SortSelect'
 import * as constants from '../../constants'
-import request from '../../api/BooksAPI'
+import {requestVolume} from '../../api/BooksAPI'
 import './style.css';
 
 function Home() {
@@ -17,15 +16,10 @@ function Home() {
     console.log(result)
   }, [result])
 
-  // useEffect(() => {
-  //   if(query)
-  //     request
-  // }, [filterId, sortingId])
-
   function searchBooks(query){
     console.log(query)
 
-    request(filterId, sortingId, constants.DEFAULT_START_INDEX, 
+    requestVolume(filterId, sortingId, constants.DEFAULT_START_INDEX, 
       constants.DEFAULT_MAX_RESULTS, query)
       .then(res => res.json())
       .then(lib => {
@@ -37,7 +31,7 @@ function Home() {
     console.log('id:', id)
     setFilter(id)
 
-    request(id, sortingId)
+    requestVolume(id, sortingId)
       .then(res => res.json())
       .then(lib => {
         setResult(lib)
@@ -48,7 +42,7 @@ function Home() {
     console.log('id:', id)
     setSorting(id)
 
-    request(filterId, id)
+    requestVolume(filterId, id)
       .then(res => res.json())
       .then(lib => {
         setResult(lib)
@@ -56,7 +50,7 @@ function Home() {
   }
 
   function onLoadMore(){
-    request(filterId, sortingId, result.items.length, constants.DEFAULT_MAX_RESULTS)
+    requestVolume(filterId, sortingId, result.items.length, constants.DEFAULT_MAX_RESULTS)
       .then(res => res.json())
       .then(lib => {
         console.log(lib)
@@ -65,18 +59,18 @@ function Home() {
   }
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="Home">
+      <header className="Home-header">
         <SearchBar searchBooks={searchBooks}/>
         <div className="headerSelects">
           <CatergoryFilter categories={constants.CATEGORIES} onChange={handleFilterChange}/>
           <SortSelect sortings={constants.SORTINGS} onChange={handleSortingChange}/>
         </div>
       </header>
-      <main className="App-main">
+      <main className="Home-main">
         <div className="Container">
-          <h3 className="App-main__results">{result.items && `Found ${result?.totalItems} results`}</h3>
-          <div className="App-main__content">
+          <h3 className="Home-main__results">{result.items && `Found ${result?.totalItems} results`}</h3>
+          <div className="Home-main__content">
             {result.items?.map((bookInfo, index) => (
               <Book volumeInfo={bookInfo.volumeInfo} id={bookInfo.id} key={index}/>
             ))}
