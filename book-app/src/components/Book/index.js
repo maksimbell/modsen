@@ -3,10 +3,10 @@ import * as constants from '../../constants'
 import defaultBook from '../../assets/default.jpg'
 import './style.css';
 
-const Book = ({volumeInfo}) => {
+const Book = ({volumeInfo, id}) => {
   
   return (
-    <div className="bookItem">
+    <a href={`book/:${id}`} className="bookItem">
       <img src={volumeInfo.imageLinks?.thumbnail ? 
         volumeInfo.imageLinks.smallThumbnail : defaultBook} 
         alt={volumeInfo.title}
@@ -17,7 +17,7 @@ const Book = ({volumeInfo}) => {
         .join(' ')}
       </h5>
       <h5 className="bookItem__author">{volumeInfo?.authors?.join(', ')}</h5>
-    </div>
+    </a>
   )
 }
 

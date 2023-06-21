@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import {Link} from 'react-router-dom';
 import Book from '../../components/Book'
 import SearchBar from '../../components/SearchBar'
 import CatergoryFilter from '../../components/CategoryFilter'
@@ -77,7 +78,7 @@ function Home() {
           <h3 className="App-main__results">{result.items && `Found ${result?.totalItems} results`}</h3>
           <div className="App-main__content">
             {result.items?.map((bookInfo, index) => (
-              <Book volumeInfo={bookInfo.volumeInfo} key={index}/>
+              <Book volumeInfo={bookInfo.volumeInfo} id={bookInfo.id} key={index}/>
             ))}
           </div>
           {result.items && <button onClick={onLoadMore}>Load more</button>}
