@@ -12,7 +12,7 @@ const SearchBar = ({searchBooks}) => {
 
   return (
     <div className="searchBar">
-      <h1 className="searchBar__title">Search for books</h1>
+      <h2 className="searchBar__title">Search for books</h2>
       <input 
         className="searchBar__input"
         type="search" 

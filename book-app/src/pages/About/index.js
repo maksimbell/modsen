@@ -15,10 +15,10 @@ const About = (props) => {
       .then(vol => {
         setBook(vol.volumeInfo)
       })
-  }, [])
+  }, [id])
 
   useEffect(() => {
-    console.log(book)
+    // console.log(book)
   }, [book])
 
   return (

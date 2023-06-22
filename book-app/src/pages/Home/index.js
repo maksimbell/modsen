@@ -75,9 +75,14 @@ function Home() {
               <Book volumeInfo={bookInfo.volumeInfo} id={bookInfo.id} key={index}/>
             ))}
           </div>
-          {result.items && <button onClick={onLoadMore}>Load more</button>}
         </div>
       </main>
+      <footer className="Home-footer">
+        {result.items && 
+          <button
+            className="Home-footer__button" 
+            onClick={onLoadMore}>Load more</button>}
+      </footer>
     </div>
   );
 }
