@@ -11,12 +11,6 @@
     pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .Home-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
-}
-
 .Home-header {
     /* background-color: rgb(132, 162, 172); */
     background-color: rgb(175, 200, 207);
@@ -30,7 +24,7 @@
 
 .Container {
     margin: 0 auto;
-    width: 1280px;
+    max-width: 1280px;
 }
 
 .Home-main__content {
@@ -48,5 +42,6 @@
     margin: 20px;
     display: flex;
     justify-content: center;
-    gap: 100px;
+    flex-wrap: wrap;
+    gap: 20px;
 }

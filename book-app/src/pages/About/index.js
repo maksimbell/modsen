@@ -1,7 +1,9 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
-import {requestBook} from '../../api/BooksAPI'
+import parse from 'html-react-parser';
+import { requestBook } from '../../api/BooksAPI'
 import defaultBook from '../../assets/default.jpg'
+import './style.css'
 
 const About = (props) => {
   const {id} = useParams();
@@ -13,7 +15,7 @@ const About = (props) => {
       .then(vol => {
         setBook(vol.volumeInfo)
       })
-  },)
+  }, [])
 
   useEffect(() => {
     console.log(book)
@@ -23,14 +25,17 @@ const About = (props) => {
     <div className="About">
       <header className="About-header"></header>
       <main className="About-main">
-        <img src={book.imageLinks?.thumbnail ? 
+        <img className="About-main__image" 
+          src={book.imageLinks?.thumbnail ? 
           book.imageLinks.smallThumbnail : defaultBook} 
           alt={book.title}
-          className="bookItem__img"/>
-        <h5 className="bookItem__category">{book?.categories?.[0]}</h5>
-        <h5 className="bookItem__title">{book.title}
-        </h5>
-        <h5 className="bookItem__author">{book?.authors?.join(', ')}</h5>
+          />
+        <div className="About-main__content">
+          <h5 className="About-main__category">{book?.categories?.join(', ')}</h5>
+          <h2 className="About-main__title">{book.title}</h2>
+          <h5 className="About-main__author">{book?.authors?.join(', ')}</h5>
+          {book?.description ? parse(book?.description) : ''}
+        </div>
       </main>
     </div>
   )
