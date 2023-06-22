@@ -1,24 +1,25 @@
 .searchBar__title {
-    margin: 30px 0;
+  margin: 30px 0;
 }
 
 .searchBar__input {
-    border-radius: 0px;
-    font-size: 16px;
-    padding: 8px;
-    text-decoration: none;
-    white-space: normal;
-    border: 1px solid rgb(252, 252, 169);
+  border-radius: 0px;
+  font-size: 16px;
+  padding: 8px;
+  text-decoration: none;
+  white-space: normal;
+  border: 1px solid rgb(252, 252, 169);
 }
 
 .searchBar__button {
-    font-size: 16px;
-    padding: 8px;
-    cursor: pointer;
-    background-color: rgb(252, 252, 169);
-    border: 1px solid rgb(252, 252, 169);
+  font-size: 16px;
+  padding: 8px;
+  cursor: pointer;
+  background-color: rgb(252, 252, 169);
+  border: 1px solid rgb(252, 252, 169);
 }
 
-.searchBar__input:hover, .searchBar__button:hover {
-    border: 1px solid rgb(206, 206, 173);
+.searchBar__input:hover,
+.searchBar__button:hover {
+  border: 1px solid rgb(206, 206, 173);
 }
