@@ -17,6 +17,7 @@ function Home() {
   useEffect(() => {
     if (loading)
       setLoading(false)
+      console.log(result)
   }, [result])
 
   useEffect(() => {
