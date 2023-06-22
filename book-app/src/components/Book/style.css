@@ -6,6 +6,7 @@
   margin: 20px auto;
   text-decoration: none;
   color: black;
+  transition-duration: 1s;
 }
 
 .bookItem__img {

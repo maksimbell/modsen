@@ -1,6 +1,5 @@
 * {
   margin: 0;
-  transition-duration: 1s;
 }
 
 .Home {
@@ -25,7 +24,7 @@
 .Container {
   margin: 0 auto;
   max-width: 1280px;
-  /* opacity: 0.1; */
+  transition-duration: 1s;
 }
 
 .Home-main__content {
@@ -55,9 +54,13 @@
   white-space: normal;
   border: 1px solid rgb(252, 252, 169);
   cursor: pointer;
-  margin: 10px 0;
+  margin: 20px 0;
 }
 
 .Home-footer__button:hover {
   border: 1px solid rgb(206, 206, 173);
+}
+
+.onload {
+  opacity: 0.1;
 }
