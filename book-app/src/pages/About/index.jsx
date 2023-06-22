@@ -6,7 +6,7 @@ import defaultBook from '../../assets/default.jpg'
 import './style.css'
 
 const About = (props) => {
-  const {id} = useParams();
+  const { id } = useParams();
   const [book, setBook] = useState({})
 
   useEffect(() => {
@@ -25,11 +25,11 @@ const About = (props) => {
     <div className="About">
       <header className="About-header"></header>
       <main className="About-main">
-        <img className="About-main__image" 
-          src={book.imageLinks?.thumbnail ? 
-          book.imageLinks.smallThumbnail : defaultBook} 
+        <img className="About-main__image"
+          src={book.imageLinks?.thumbnail ?
+            book.imageLinks.smallThumbnail : defaultBook}
           alt={book.title}
-          />
+        />
         <div className="About-main__content">
           <h5 className="About-main__category">{book?.categories?.join(', ')}</h5>
           <h2 className="About-main__title">{book.title}</h2>
