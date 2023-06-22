@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import Book from '../../components/Book'
-import SearchBar from '../../components/SearchBar'
-import CatergoryFilter from '../../components/CategoryFilter'
-import SortSelect from '../../components/SortSelect'
-import * as constants from '../../constants'
-import { requestVolume } from '../../api/BooksAPI'
+import Book from '@components/Book'
+import SearchBar from '@components/SearchBar'
+import CatergoryFilter from '@components/CategoryFilter'
+import SortSelect from '@components/SortSelect'
+import * as constants from '@constants'
+import { requestVolume } from '@api/BooksAPI'
 import './style.css';
 
 function Home() {

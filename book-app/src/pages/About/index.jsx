@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import parse from 'html-react-parser';
-import { requestBook } from '../../api/BooksAPI'
-import defaultBook from '../../assets/default.jpg'
+import { requestBook } from '@api/BooksAPI'
+import defaultBook from '@assets/default.jpg'
 import './style.css'
 
 const About = (props) => {
