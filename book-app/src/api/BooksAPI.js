@@ -1,12 +1,12 @@
 import * as constants from '@constants'
 
-let prevQuery
+let prevQuery = ''
 
 export function requestVolume(filterId, sortingId, startIndex = constants.DEFAULT_START_INDEX,
     maxResults = constants.DEFAULT_MAX_RESULTS, query = prevQuery) {
     prevQuery = query
 
-    return fetch(`${constants.API_URL}` +
+    return fetch(`${constants.BOOKS_API_URL}` +
         `?q=${query}` +
         `${filterId > 0 ? `+subject:${constants.CATEGORIES[filterId]}` : ``}` +
         `&startIndex=${startIndex}` +
@@ -16,5 +16,5 @@ export function requestVolume(filterId, sortingId, startIndex = constants.DEFAUL
 }
 
 export function requestBook(id) {
-    return fetch(`${constants.API_URL}/${id}`)
+    return fetch(`${constants.BOOKS_API_URL}/${id}`)
 }

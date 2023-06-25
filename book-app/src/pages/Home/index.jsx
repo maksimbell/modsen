@@ -4,6 +4,7 @@ import SearchBar from '@components/SearchBar'
 import SearchSelect from '@components/SearchSelect'
 import * as constants from '@constants'
 import { requestVolume } from '@api/BooksAPI'
+import { requestIpData } from '@api/IpDataAPI'
 import { InfinitySpin } from 'react-loader-spinner'
 import './style.css';
 
@@ -15,7 +16,12 @@ function Home() {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    console.log('LESS GO!')
+
+    // requestIpData()
+    //   .then(res => res.json())
+    //   .then(ipData => {
+    //     console.log(ipData)
+    //   })
   }, [])
 
   useEffect(() => {
@@ -27,10 +33,12 @@ function Home() {
   }, [result])
 
   useEffect(() => {
-    // if (!loading && result.totalItems === 0) {
-    //   alert(constants.NO_RESULT_STRING)
-    // }
-  }, [loading])
+    requestVolume(filterId, sortingId)
+      .then(res => res.json())
+      .then(lib => {
+        setResult(lib)
+      })
+  }, [filterId, sortingId])
 
   function searchBooks(query) {
     console.log(query)
@@ -45,25 +53,13 @@ function Home() {
   }
 
   function handleFilterChange(id) {
-    setFilter(id)
     setLoading(true)
-
-    requestVolume(id, sortingId)
-      .then(res => res.json())
-      .then(lib => {
-        setResult(lib)
-      })
+    setFilter(id)
   }
 
   function handleSortingChange(id) {
-    setSorting(id)
     setLoading(true)
-
-    requestVolume(filterId, id)
-      .then(res => res.json())
-      .then(lib => {
-        setResult(lib)
-      })
+    setSorting(id)
   }
 
   function onLoadMore() {
@@ -86,13 +82,13 @@ function Home() {
       <header className="Home-header">
         <SearchBar searchBooks={searchBooks} />
         <div className="headerSelects">
-          <SearchSelect items={constants.CATEGORIES} onChange={handleFilterChange} />
-          <SearchSelect items={constants.SORTINGS} onChange={handleSortingChange} />
+          <SearchSelect name={'Categories'} items={constants.CATEGORIES} onChange={handleFilterChange} />
+          <SearchSelect name={'Sorting by'} items={constants.SORTINGS} onChange={handleSortingChange} />
         </div>
       </header>
       <main className="Home-main">
         <div className={`Container` + `${loading ? ' onload' : ''}`}>
-          <h3 className="Home-main__results">{result.items && `Found ${result?.totalItems} results`}</h3>
+          <h3 className="Home-main__results">{result.totalItems !== undefined && `Found ${result?.totalItems} results`}</h3>
           <div className="Home-main__content">
             {books}
           </div>
