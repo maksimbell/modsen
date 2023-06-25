@@ -8,7 +8,7 @@ export function requestVolume(filterId, sortingId, startIndex = constants.DEFAUL
 
     return fetch(`${constants.API_URL}` +
         `?q=${query}` +
-        `${filterId && `+subject:${constants.CATEGORIES[filterId]}`}` +
+        `${filterId > 0 ? `+subject:${constants.CATEGORIES[filterId]}` : ``}` +
         `&startIndex=${startIndex}` +
         `&maxResults=${maxResults}` +
         `&orderBy=${constants.SORTINGS[sortingId]}` +

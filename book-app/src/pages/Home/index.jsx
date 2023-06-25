@@ -15,13 +15,21 @@ function Home() {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    console.log('LESS GO!')
+  }, [])
+
+  useEffect(() => {
     if (loading)
       setLoading(false)
-      console.log(result)
+
+    console.log(result)
+
   }, [result])
 
   useEffect(() => {
-    console.log('!!!')
+    // if (!loading && result.totalItems === 0) {
+    //   alert(constants.NO_RESULT_STRING)
+    // }
   }, [loading])
 
   function searchBooks(query) {
