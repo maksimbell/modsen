@@ -33,6 +33,7 @@ function Home() {
   }, [result])
 
   useEffect(() => {
+    
     requestVolume(filterId, sortingId)
       .then(res => res.json())
       .then(lib => {
@@ -64,6 +65,7 @@ function Home() {
 
   function onLoadMore() {
     setLoading(true)
+
     requestVolume(filterId, sortingId, result.items.length, constants.DEFAULT_MAX_RESULTS)
       .then(res => res.json())
       .then(lib => {
