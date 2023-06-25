@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Book from '@components/Book'
-import SearchBar from '@components/SearchBar'
-import SearchSelect from '@components/SearchSelect'
+import SearchHeader from '@components/SearchHeader'
 import * as constants from '@constants'
 import { requestVolume } from '@api/BooksAPI'
 import { requestIpData } from '@api/IpDataAPI'
@@ -10,9 +9,6 @@ import './style.css';
 
 function Home() {
   const [result, setResult] = useState([])
-  const [filterId, setFilter] = useState(0)
-  const [sortingId, setSorting] = useState(0)
-
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
@@ -32,39 +28,23 @@ function Home() {
 
   }, [result])
 
-  useEffect(() => {
-    requestVolume(filterId, sortingId)
-      .then(res => res.json())
-      .then(lib => {
-        setResult(lib)
-      })
-  }, [filterId, sortingId])
-
-  function searchBooks(query) {
-    console.log(query)
+  function searchBooks(queryParams) {
     setLoading(true)
+    console.log(11)
+    console.log(queryParams)
 
-    requestVolume(filterId, sortingId, constants.DEFAULT_START_INDEX,
-      constants.DEFAULT_MAX_RESULTS, query)
-      .then(res => res.json())
-      .then(lib => {
-        setResult(lib)
-      })
-  }
-
-  function handleFilterChange(id) {
-    setLoading(true)
-    setFilter(id)
-  }
-
-  function handleSortingChange(id) {
-    setLoading(true)
-    setSorting(id)
+    if (queryParams.text)
+      requestVolume(constants.DEFAULT_START_INDEX, queryParams)
+        .then(res => res.json())
+        .then(lib => {
+          setResult(lib)
+        })
   }
 
   function onLoadMore() {
     setLoading(true)
-    requestVolume(filterId, sortingId, result.items.length, constants.DEFAULT_MAX_RESULTS)
+
+    requestVolume(result.items.length)
       .then(res => res.json())
       .then(lib => {
         console.log(lib)
@@ -79,13 +59,7 @@ function Home() {
 
   return (
     <div className="Home">
-      <header className="Home-header">
-        <SearchBar searchBooks={searchBooks} />
-        <div className="headerSelects">
-          <SearchSelect name={'Categories'} items={constants.CATEGORIES} onChange={handleFilterChange} />
-          <SearchSelect name={'Sorting by'} items={constants.SORTINGS} onChange={handleSortingChange} />
-        </div>
-      </header>
+      <SearchHeader searchBooks={searchBooks} />
       <main className="Home-main">
         <div className={`Container` + `${loading ? ' onload' : ''}`}>
           <h3 className="Home-main__results">{result.totalItems !== undefined && `Found ${result?.totalItems} results`}</h3>
