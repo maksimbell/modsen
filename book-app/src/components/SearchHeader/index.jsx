@@ -5,16 +5,15 @@ import * as constants from '@constants'
 import './style.css';
 
 const SearchHeader = ({ searchBooks }) => {
+  const [query, setQuery] = useState('')
   const [params, setParams] = useState({
-    text: '',
     filterId: 0,
     sortingId: 0,
   })
 
   useEffect(() => {
-    if (params.text) {
-      searchBooks(params)
-      console.log(params)
+    if (query) {
+      searchBooks(query, params)
     }
   }, [params])
 
@@ -27,13 +26,12 @@ const SearchHeader = ({ searchBooks }) => {
   }
 
   function handleQueryChange(e) {
-    console.log(e.target.value)
-    setParams({ text: e.target.value, ...params })
+    setQuery(e.target.value)
   }
 
   return (
     <header className="Home-header">
-      <SearchBar onChange={handleQueryChange} handleClick={searchBooks} />
+      <SearchBar onChange={handleQueryChange} handleClick={() => searchBooks(query, params)} />
       <div className="headerSelects">
         <SearchSelect name={'Categories'} items={constants.CATEGORIES} onChange={handleFilterChange} />
         <SearchSelect name={'Sorting by'} items={constants.SORTINGS} onChange={handleSortingChange} />

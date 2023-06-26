@@ -28,13 +28,12 @@ function Home() {
 
   }, [result])
 
-  function searchBooks(queryParams) {
+  function searchBooks(query, params) {
     setLoading(true)
-    console.log(11)
-    console.log(queryParams)
 
-    if (queryParams.text)
-      requestVolume(constants.DEFAULT_START_INDEX, queryParams)
+    console.log('Search here')
+    if (query)
+      requestVolume(constants.DEFAULT_START_INDEX, params, query)
         .then(res => res.json())
         .then(lib => {
           setResult(lib)
@@ -44,12 +43,12 @@ function Home() {
   function onLoadMore() {
     setLoading(true)
 
-    requestVolume(result.items.length)
-      .then(res => res.json())
-      .then(lib => {
-        console.log(lib)
-        setResult({ ...result, items: [...result.items, ...lib.items], })
-      })
+    // requestVolume(result.items.length)
+    //   .then(res => res.json())
+    //   .then(lib => {
+    //     console.log(lib)
+    //     setResult({ ...result, items: [...result.items, ...lib.items], })
+    //   })
   }
 
   const books = result.items?.map((bookInfo, index) => (

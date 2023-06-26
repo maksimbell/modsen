@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './style.css'
 
-const SearchBar = ({ handleQueryChange, handleClick }) => {
+const SearchBar = ({ onChange, handleClick }) => {
 
   return (
     <div className="searchBar">
@@ -9,7 +9,7 @@ const SearchBar = ({ handleQueryChange, handleClick }) => {
       <input
         className="searchBar__input"
         type="search"
-        onChange={handleQueryChange}
+        onChange={onChange}
       />
       <button type="submit" onClick={handleClick}
         className="searchBar__button">Search</button>

@@ -1,21 +1,14 @@
 import * as constants from '@constants'
 
-const queryParams = {}
-
-export function requestVolume(startIndex, params = queryParams) {
-
-    queryParams = {
-        ...params
-    }
+export function requestVolume(startIndex, params, query = '123') {
 
     const {
-        text,
-        sortingId,
-        filterId
-    } = queryParams
+        filterId,
+        sortingId
+    } = params
 
     return fetch(`${constants.BOOKS_API_URL}` +
-        `?q=${text}` +
+        `?q=${query}` +
         `${filterId > 0 ? `+subject:${constants.CATEGORIES[filterId]}` : ``}` +
         `&startIndex=${startIndex}` +
         `&maxResults=${constants.DEFAULT_MAX_RESULTS}` +
