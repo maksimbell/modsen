@@ -1,7 +1,7 @@
 import React from 'react'
 import './style.css'
 
-const SearchSelect = ({name, items, onChange}) => {
+const SearchSelect = ({ name, items, valueId, onChange }) => {
 
   const handleChange = (event) => {
     const value = event.target.value
@@ -12,8 +12,8 @@ const SearchSelect = ({name, items, onChange}) => {
   return (
     <div className="bookSelect">
       <h3 className="bookSelect__name">{name}</h3>
-      <select name="categories" 
-        className="bookSelect__select" onChange={handleChange}>
+      <select name="categories"
+        className="bookSelect__select" value={items[valueId]} onChange={handleChange}>
         {items.map((item, index) => <option value={item} key={index}>{item}</option>)}
       </select>
     </div>
