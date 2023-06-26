@@ -36,13 +36,29 @@ function Home() {
   }, [result])
 
   useEffect(() => {
+    console.log(params)
     if (query) {
       searchBooks(query, params)
     }
   }, [params])
 
+  function handleFilterChange(id) {
+    console.log(id)
+    setParams({ ...params, filterId: id })
+  }
+
+  function handleSortingChange(id) {
+    console.log(id)
+    setParams({ ...params, sortingId: id })
+  }
+
+  function handleQueryChange(e) {
+    setQuery(e.target.value)
+  }
+
   function searchBooks() {
     setLoading(true)
+    console.log(121)
     console.log(query, params)
 
     if (query)
@@ -102,18 +118,6 @@ function Home() {
       </footer>
     </div >
   );
-
-  function handleFilterChange(id) {
-    setParams({ filterId: id, ...params })
-  }
-
-  function handleSortingChange(id) {
-    setParams({ sortingId: id, ...params })
-  }
-
-  function handleQueryChange(e) {
-    setQuery(e.target.value)
-  }
 }
 
 export default Home;
