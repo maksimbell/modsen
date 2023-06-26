@@ -1,14 +1,7 @@
 import React, { useState } from 'react'
 import './style.css'
 
-const SearchBar = ({ searchBooks }) => {
-  const [query, setQuery] = useState('')
-
-  const handleQueryChange = (event) => setQuery(event.target.value)
-  const handleClick = (event) => {
-    if (query)
-      searchBooks(query)
-  }
+const SearchBar = ({ onChange, handleClick }) => {
 
   return (
     <div className="searchBar">
@@ -16,8 +9,7 @@ const SearchBar = ({ searchBooks }) => {
       <input
         className="searchBar__input"
         type="search"
-        onChange={handleQueryChange}
-        value={query}
+        onChange={onChange}
       />
       <button type="submit" onClick={handleClick}
         className="searchBar__button">Search</button>

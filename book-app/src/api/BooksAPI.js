@@ -1,16 +1,17 @@
 import * as constants from '@constants'
 
-let prevQuery = ''
+export function requestVolume(query, params, startIndex = constants.DEFAULT_START_INDEX) {
 
-export function requestVolume(filterId, sortingId, startIndex = constants.DEFAULT_START_INDEX,
-    maxResults = constants.DEFAULT_MAX_RESULTS, query = prevQuery) {
-    prevQuery = query
+    const {
+        filterId,
+        sortingId
+    } = params
 
     return fetch(`${constants.BOOKS_API_URL}` +
         `?q=${query}` +
         `${filterId > 0 ? `+subject:${constants.CATEGORIES[filterId]}` : ``}` +
         `&startIndex=${startIndex}` +
-        `&maxResults=${maxResults}` +
+        `&maxResults=${constants.DEFAULT_MAX_RESULTS}` +
         `&orderBy=${constants.SORTINGS[sortingId]}` +
         `&key=${process.env.REACT_APP_API_KEY}`)
 }

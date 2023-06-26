@@ -10,18 +10,21 @@ import './style.css';
 
 function Home() {
   const [result, setResult] = useState([])
-  const [filterId, setFilter] = useState(0)
-  const [sortingId, setSorting] = useState(0)
-
   const [loading, setLoading] = useState(false)
+
+  const [query, setQuery] = useState('')
+  const [params, setParams] = useState({
+    filterId: 0,
+    sortingId: 0,
+  })
 
   useEffect(() => {
 
-    // requestIpData()
-    //   .then(res => res.json())
-    //   .then(ipData => {
-    //     console.log(ipData)
-    //   })
+    requestIpData()
+      .then(res => res.json())
+      .then(ipData => {
+        console.log(ipData)
+      })
   }, [])
 
   useEffect(() => {
@@ -33,40 +36,27 @@ function Home() {
   }, [result])
 
   useEffect(() => {
-    
-    requestVolume(filterId, sortingId)
-      .then(res => res.json())
-      .then(lib => {
-        setResult(lib)
-      })
-  }, [filterId, sortingId])
+    if (query) {
+      searchBooks(query, params)
+    }
+  }, [params])
 
-  function searchBooks(query) {
-    console.log(query)
+  function searchBooks() {
     setLoading(true)
+    console.log(query, params)
 
-    requestVolume(filterId, sortingId, constants.DEFAULT_START_INDEX,
-      constants.DEFAULT_MAX_RESULTS, query)
-      .then(res => res.json())
-      .then(lib => {
-        setResult(lib)
-      })
-  }
-
-  function handleFilterChange(id) {
-    setLoading(true)
-    setFilter(id)
-  }
-
-  function handleSortingChange(id) {
-    setLoading(true)
-    setSorting(id)
+    if (query)
+      requestVolume(query, params)
+        .then(res => res.json())
+        .then(lib => {
+          setResult(lib)
+        })
   }
 
   function onLoadMore() {
     setLoading(true)
 
-    requestVolume(filterId, sortingId, result.items.length, constants.DEFAULT_MAX_RESULTS)
+    requestVolume(query, params, result.items.length)
       .then(res => res.json())
       .then(lib => {
         console.log(lib)
@@ -82,7 +72,7 @@ function Home() {
   return (
     <div className="Home">
       <header className="Home-header">
-        <SearchBar searchBooks={searchBooks} />
+        <SearchBar onChange={handleQueryChange} handleClick={searchBooks} />
         <div className="headerSelects">
           <SearchSelect name={'Categories'} items={constants.CATEGORIES} onChange={handleFilterChange} />
           <SearchSelect name={'Sorting by'} items={constants.SORTINGS} onChange={handleSortingChange} />
@@ -111,6 +101,18 @@ function Home() {
       </footer>
     </div>
   );
+
+  function handleFilterChange(id) {
+    setParams({ filterId: id, ...params })
+  }
+
+  function handleSortingChange(id) {
+    setParams({ sortingId: id, ...params })
+  }
+
+  function handleQueryChange(e) {
+    setQuery(e.target.value)
+  }
 }
 
 export default Home;
