@@ -95,11 +95,12 @@ function Home() {
       </main>
       <footer className="Home-footer">
         {result.items &&
-          <button
+          result.items.length !== result.totalItems &&
+          < button
             className="Home-footer__button"
             onClick={onLoadMore}>Load more</button>}
       </footer>
-    </div>
+    </div >
   );
 
   function handleFilterChange(id) {
