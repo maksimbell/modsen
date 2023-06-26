@@ -16,9 +16,14 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  // const [ipVerified, setIpVerified] = useState(false)
+  // const [hasAccess, setAccess] = useState(false)
+
+  // if(!ipVerified)
   return (
     <ErrorBoundary fallback={<p>Something went wrong</p>}>
       <RouterProvider router={router} />
+      {/* {hasAccess ? <RouterProvider router={router} /> : <p>No access</p>} */}
     </ErrorBoundary>
   )
 }

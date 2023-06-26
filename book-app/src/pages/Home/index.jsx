@@ -1,79 +1,51 @@
 import React, { useState, useEffect } from 'react'
-import { Outlet, Link } from "react-router-dom";
+import { useNavigate, createSearchParams, useSearchParams } from "react-router-dom";
 import Book from '@components/Book'
-import SearchBar from '@components/SearchBar'
-import SearchSelect from '@components/SearchSelect'
-import * as constants from '@constants'
 import { requestVolume } from '@api/BooksAPI'
-import { requestIpData } from '@api/IpDataAPI'
+// import { requestIpData } from '@api/IpDataAPI'
 import { InfinitySpin } from 'react-loader-spinner'
 import './style.css';
+import SearchHeader from '../../components/SearchHeader';
 
 function Home() {
   const [result, setResult] = useState([])
   const [loading, setLoading] = useState(false)
 
-  const [query, setQuery] = useState('')
-  const [params, setParams] = useState({
-    filterId: 0,
-    sortingId: 0,
-  })
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
-
-    requestIpData()
-      .then(res => res.json())
-      .then(ipData => {
-        console.log(ipData)
-      })
-  }, [])
-
-  useEffect(() => {
-    if (loading)
-      setLoading(false)
-
-    console.log(result)
-
-  }, [result])
-
-  useEffect(() => {
+    const params = Object.fromEntries(searchParams)
     console.log(params)
-    if (query) {
-      searchBooks(query, params)
-    }
-  }, [params])
 
-  function handleFilterChange(id) {
-    console.log(id)
-    setParams({ ...params, filterId: id })
-  }
+    if (params.query) {
+      setLoading(true)
 
-  function handleSortingChange(id) {
-    console.log(id)
-    setParams({ ...params, sortingId: id })
-  }
-
-  function handleQueryChange(e) {
-    setQuery(e.target.value)
-  }
-
-  function searchBooks() {
-    setLoading(true)
-    console.log(121)
-    console.log(query, params)
-
-    if (query)
-      requestVolume(query, params)
+      requestVolume(params)
         .then(res => res.json())
         .then(lib => {
           setResult(lib)
         })
+    }
+  }, [searchParams])
+
+  useEffect(() => {
+    if (loading)
+      setLoading(false)
+  }, [result])
+
+  function handleParamsChange(params) {
+    navigate({
+      pathname: '/',
+      search: `${createSearchParams(params)}`,
+    })
   }
 
   function onLoadMore() {
     setLoading(true)
+    const params = Object.fromEntries(searchParams)
 
-    requestVolume(query, params, result.items.length)
+    requestVolume(params, result.items.length)
       .then(res => res.json())
       .then(lib => {
         console.log(lib)
@@ -88,14 +60,7 @@ function Home() {
 
   return (
     <div className="Home">
-      <Link to={`/search?query=сыр`}>Your Friend</Link>
-      <header className="Home-header">
-        <SearchBar onChange={handleQueryChange} handleClick={searchBooks} />
-        <div className="headerSelects">
-          <SearchSelect name={'Categories'} items={constants.CATEGORIES} onChange={handleFilterChange} />
-          <SearchSelect name={'Sorting by'} items={constants.SORTINGS} onChange={handleSortingChange} />
-        </div>
-      </header>
+      <SearchHeader onParamsChange={handleParamsChange} hasResult={result?.totalItems >= 0}/>
       <main className="Home-main">
         <div className={`Container` + `${loading ? ' onload' : ''}`}>
           <h3 className="Home-main__results">{result.totalItems !== undefined && `Found ${result?.totalItems} results`}</h3>
@@ -114,7 +79,7 @@ function Home() {
       <footer className="Home-footer">
         {result.items &&
           result.items.length !== result.totalItems &&
-          < button
+          <button
             className="Home-footer__button"
             onClick={onLoadMore}>Load more</button>}
       </footer>
