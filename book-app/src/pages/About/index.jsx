@@ -7,6 +7,8 @@ import './style.css'
 
 const About = (props) => {
   const { id } = useParams();
+  console.log(id)
+  
   const [book, setBook] = useState({})
 
   useEffect(() => {

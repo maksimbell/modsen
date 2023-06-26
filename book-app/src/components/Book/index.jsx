@@ -1,4 +1,5 @@
 import React from 'react'
+import { Outlet, Link } from "react-router-dom";
 import * as constants from '@constants'
 import defaultBook from '@assets/default.jpg'
 import './style.css';
@@ -7,7 +8,7 @@ const Book = ({ volumeInfo, id }) => {
   const { imageLinks, categories, authors, title } = volumeInfo
 
   return (
-    <a href={`book/${id}`} className="bookItem">
+    <Link to={`books/${id}`} className="bookItem">
       <img
         className="bookItem__img"
         src={imageLinks?.thumbnail ?
@@ -19,7 +20,7 @@ const Book = ({ volumeInfo, id }) => {
         .join(' ')}
       </h5>
       <h5 className="bookItem__author">{authors?.join(', ')}</h5>
-    </a>
+    </Link>
   )
 }
 

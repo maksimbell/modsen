@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Outlet, Link } from "react-router-dom";
 import Book from '@components/Book'
 import SearchBar from '@components/SearchBar'
 import SearchSelect from '@components/SearchSelect'
@@ -87,6 +88,7 @@ function Home() {
 
   return (
     <div className="Home">
+      <Link to={`/search?query=сыр`}>Your Friend</Link>
       <header className="Home-header">
         <SearchBar onChange={handleQueryChange} handleClick={searchBooks} />
         <div className="headerSelects">
