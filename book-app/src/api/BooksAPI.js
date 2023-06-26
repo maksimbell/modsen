@@ -1,6 +1,6 @@
 import * as constants from '@constants'
 
-export function requestVolume(startIndex, params, query = '123') {
+export function requestVolume(query, params, startIndex = constants.DEFAULT_START_INDEX) {
 
     const {
         filterId,

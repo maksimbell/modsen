@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Book from '@components/Book'
-import SearchHeader from '@components/SearchHeader'
+import SearchBar from '@components/SearchBar'
+import SearchSelect from '@components/SearchSelect'
 import * as constants from '@constants'
 import { requestVolume } from '@api/BooksAPI'
 import { requestIpData } from '@api/IpDataAPI'
@@ -11,13 +12,19 @@ function Home() {
   const [result, setResult] = useState([])
   const [loading, setLoading] = useState(false)
 
+  const [query, setQuery] = useState('')
+  const [params, setParams] = useState({
+    filterId: 0,
+    sortingId: 0,
+  })
+
   useEffect(() => {
 
-    // requestIpData()
-    //   .then(res => res.json())
-    //   .then(ipData => {
-    //     console.log(ipData)
-    //   })
+    requestIpData()
+      .then(res => res.json())
+      .then(ipData => {
+        console.log(ipData)
+      })
   }, [])
 
   useEffect(() => {
@@ -28,12 +35,18 @@ function Home() {
 
   }, [result])
 
-  function searchBooks(query, params) {
-    setLoading(true)
+  useEffect(() => {
+    if (query) {
+      searchBooks(query, params)
+    }
+  }, [params])
 
-    console.log('Search here')
+  function searchBooks() {
+    setLoading(true)
+    console.log(query, params)
+
     if (query)
-      requestVolume(constants.DEFAULT_START_INDEX, params, query)
+      requestVolume(query, params)
         .then(res => res.json())
         .then(lib => {
           setResult(lib)
@@ -43,12 +56,12 @@ function Home() {
   function onLoadMore() {
     setLoading(true)
 
-    // requestVolume(result.items.length)
-    //   .then(res => res.json())
-    //   .then(lib => {
-    //     console.log(lib)
-    //     setResult({ ...result, items: [...result.items, ...lib.items], })
-    //   })
+    requestVolume(query, params, result.items.length)
+      .then(res => res.json())
+      .then(lib => {
+        console.log(lib)
+        setResult({ ...result, items: [...result.items, ...lib.items], })
+      })
   }
 
   const books = result.items?.map((bookInfo, index) => (
@@ -58,7 +71,13 @@ function Home() {
 
   return (
     <div className="Home">
-      <SearchHeader searchBooks={searchBooks} />
+      <header className="Home-header">
+        <SearchBar onChange={handleQueryChange} handleClick={searchBooks} />
+        <div className="headerSelects">
+          <SearchSelect name={'Categories'} items={constants.CATEGORIES} onChange={handleFilterChange} />
+          <SearchSelect name={'Sorting by'} items={constants.SORTINGS} onChange={handleSortingChange} />
+        </div>
+      </header>
       <main className="Home-main">
         <div className={`Container` + `${loading ? ' onload' : ''}`}>
           <h3 className="Home-main__results">{result.totalItems !== undefined && `Found ${result?.totalItems} results`}</h3>
@@ -82,6 +101,18 @@ function Home() {
       </footer>
     </div>
   );
+
+  function handleFilterChange(id) {
+    setParams({ filterId: id, ...params })
+  }
+
+  function handleSortingChange(id) {
+    setParams({ sortingId: id, ...params })
+  }
+
+  function handleQueryChange(e) {
+    setQuery(e.target.value)
+  }
 }
 
 export default Home;
