@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate, createSearchParams, useSearchParams } from "react-router-dom";
 import Layout from '@components/Layout'
 import Book from '@components/Book'
-import SearchBar from '../../components/Header/node_modules/@components/SearchBar'
-import SearchSelect from '../../components/Header/node_modules/@components/SearchSelect'
+import SearchBar from '@components/SearchBar'
+import SearchSelect from '@components/SearchSelect'
 import { requestVolume } from '@api/BooksAPI'
 // import { requestIpData } from '@api/IpDataAPI'
-import * as constants from '../../components/Header/node_modules/@constants'
+import * as constants from '@constants'
 import { InfinitySpin } from 'react-loader-spinner'
 import './style.css';
 
