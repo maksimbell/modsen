@@ -4,7 +4,7 @@ import SearchSelect from '@components/SearchSelect'
 import * as constants from '@constants'
 import './style.css';
 
-const SearchHeader = ({ onParamsChange, hasResult }) => {
+const Header = ({ onParamsChange, hasResult }) => {
   const [query, setQuery] = useState('')
   const [params, setParams] = useState({
     filterId: 0,
@@ -49,4 +49,4 @@ const SearchHeader = ({ onParamsChange, hasResult }) => {
   )
 }
 
-export default SearchHeader
+export default Header

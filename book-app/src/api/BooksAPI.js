@@ -1,4 +1,4 @@
-import * as constants from '@constants'
+import * as constants from '../components/Header/node_modules/@constants'
 
 export function requestVolume(params, startIndex = constants.DEFAULT_START_INDEX) {
 
