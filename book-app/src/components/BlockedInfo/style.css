@@ -1,0 +1,13 @@
+.Blocked-info {
+    position: relative; 
+    top: 270px;
+    display: inline-block;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Blocked-info__description {
+    font-size: 20px;
+}

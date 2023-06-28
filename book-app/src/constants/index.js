@@ -12,3 +12,5 @@ export const State = {
     access: 1,
     block: 2,
 }
+export const SERVICE_BLOCKED_TITLE = 'Not available'
+export const SERVICE_BLOCKED_DESCRIPTION = 'maksimbell\'s services are not available in your country.'

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom';
 import { requestIpData } from '@api/IpDataAPI'
 import ErrorBoundary from '@components/ErrorBoundary'
+import BlockedInfo from '@components/BlockedInfo'
 import Header from '@components/Header'
 import Home from '@pages/Home'
 import About from '@pages/About'
@@ -51,7 +52,7 @@ function App() {
             </div>)
           ||
           (state === State.block &&
-            <p>Blocked</p>)}
+            <BlockedInfo />)}
       </ErrorBoundary>
     </div>
   )
