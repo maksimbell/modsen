@@ -27,11 +27,13 @@ const About = (props) => {
     <div className="About">
       <header className="About-header"></header>
       <main className="About-main">
-        <img className="About-main__image"
-          src={book.imageLinks?.thumbnail ?
-            book.imageLinks.smallThumbnail : defaultBook}
-          alt={book.title}
-        />
+        <div>
+          <img className="About-main__image"
+            src={book.imageLinks?.thumbnail ?
+              book.imageLinks.smallThumbnail : defaultBook}
+            alt={book.title}
+          />
+        </div>
         <div className="About-main__content">
           <h5 className="About-main__category">{book?.categories?.join(', ')}</h5>
           <h2 className="About-main__title">{book.title}</h2>

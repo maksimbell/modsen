@@ -6,3 +6,9 @@ export const DEFAULT_MAX_RESULTS = 32
 export const MAX_WORDS_TITLE = 4
 export const NO_RESULT_STRING = 'Something went wrong, no result found. Check your VPN config or change the query.'
 export const IPDATA_API_URL = 'https://api.ipdata.co/?api-key='
+export const BLOCKED_COUNTRIES = ['Belarus', 'France']
+export const State = {
+    verify: 0,
+    access: 1,
+    block: 2,
+}

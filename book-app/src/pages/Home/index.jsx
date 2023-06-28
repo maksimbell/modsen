@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { useSearchParams } from "react-router-dom";
 import Book from '@components/Book'
 import { requestVolume } from '@api/BooksAPI'
-// import { requestIpData } from '@api/IpDataAPI'
 import { InfinitySpin } from 'react-loader-spinner'
 import './style.css';
 
