@@ -1,5 +1,5 @@
 import React from 'react'
-import { Outlet, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as constants from '@constants'
 import defaultBook from '@assets/default.jpg'
 import './style.css';

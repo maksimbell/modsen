@@ -7,7 +7,7 @@ import Header from '@components/Header'
 import Home from '@pages/Home'
 import About from '@pages/About'
 import { checkIpData } from './utils/IpData'
-import { State } from '@constants'
+import { State } from './config'
 import { InfinitySpin } from 'react-loader-spinner'
 import './App.css'
 

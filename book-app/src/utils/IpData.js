@@ -1,4 +1,4 @@
-import * as constants from '@constants'
+import * as constants from './config'
 
 export const checkIpData = (ipData) => {
     // console.log(constants.BLOCKED_COUNTRIES)
