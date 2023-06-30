@@ -1,5 +1,5 @@
-import * as config from './config'
+import * as constants from '@constants'
 
 export function requestIpData() {
-    return fetch(`${config.IPDATA_API_URL}${process.env.REACT_APP_IPDATA_API_KEY}`)
+    return fetch(`${constants.IPDATA_API_URL}${process.env.REACT_APP_IPDATA_API_KEY}`)
 }

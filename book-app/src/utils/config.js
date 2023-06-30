@@ -1,1 +1,0 @@
-export const BLOCKED_COUNTRIES = ['Belarus', 'France']

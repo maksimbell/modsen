@@ -6,20 +6,23 @@ import './style.css';
 
 const Book = ({ volumeInfo, id }) => {
   const { imageLinks, categories, authors, title } = volumeInfo
-  const { thumbnail, smallThumbnail } = imageLinks
+  // const { thumbnail, smallThumbnail } = imageLinks
+
+  const bookCategory = categories?.[0]
+  const bookTitle = title?.split(' ')
+    .filter((_, index) => index <= constants.MAX_WORDS_TITLE)
+    .join(' ')
+  const bookAuthors = authors?.join(', ')
 
   return (
     <Link to={`books/${id}`} className="bookItem">
       <img
         className="bookItem__img"
-        src={thumbnail ? smallThumbnail : defaultBook}
+        src={imageLinks?.thumbnail ? imageLinks?.smallThumbnail : defaultBook}
         alt={title} />
-      <h5 className="bookItem__category">{categories?.[0]}</h5>
-      <h5 className="bookItem__title">{title?.split(' ')
-        .filter((_, index) => index <= constants.MAX_WORDS_TITLE)
-        .join(' ')}
-      </h5>
-      <h5 className="bookItem__author">{authors?.join(', ')}</h5>
+      <h5 className="bookItem__category">{bookCategory}</h5>
+      <h5 className="bookItem__title">{bookTitle}</h5>
+      <h5 className="bookItem__author">{bookAuthors}</h5>
     </Link>
   )
 }

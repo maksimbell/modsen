@@ -28,11 +28,6 @@ const Header = () => {
   }, [])
 
   useEffect(() => {
-    console.log(query)
-  }, [query])
-
-  useEffect(() => {
-    console.log(params)
 
     if (query)
       handleParamsChange({ query, ...params })
@@ -44,18 +39,6 @@ const Header = () => {
       search: `${createSearchParams(params)}`,
     })
   }
-
-  return (
-    <header className="Home-header">
-      <SearchBar onChange={handleQueryChange} value={query} handleClick={handleClick} />
-      <div className="headerSelects">
-        <SearchSelect name={'Categories'} items={constants.CATEGORIES}
-          valueId={params.filterId} onChange={handleFilterChange} />
-        <SearchSelect name={'Sorting by'} items={constants.SORTINGS}
-          valueId={params.sortingId} onChange={handleSortingChange} />
-      </div>
-    </header>
-  )
 
   function handleFilterChange(id) {
     setParams({ ...params, filterId: id })
@@ -73,6 +56,18 @@ const Header = () => {
     if (query)
       handleParamsChange({ query, ...params })
   }
+
+  return (
+    <header className="Home-header">
+      <SearchBar onChange={handleQueryChange} value={query} handleClick={handleClick} />
+      <div className="headerSelects">
+        <SearchSelect name={'Categories'} items={constants.CATEGORIES}
+          valueId={params.filterId} onChange={handleFilterChange} />
+        <SearchSelect name={'Sorting by'} items={constants.SORTINGS}
+          valueId={params.sortingId} onChange={handleSortingChange} />
+      </div>
+    </header>
+  )
 }
 
 export default Header

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSearchParams } from "react-router-dom";
 import Book from '@components/Book'
-import { requestVolume } from '@api/BooksAPI'
+import { requestVolume } from '@api/booksAPI'
 import { InfinitySpin } from 'react-loader-spinner'
 import './style.css';
 
@@ -13,7 +13,6 @@ function Home() {
 
   useEffect(() => {
     const params = Object.fromEntries(searchParams)
-    console.log(params)
 
     if (params.query) {
       setLoading(true)
@@ -42,14 +41,12 @@ function Home() {
     requestVolume(params, result.items.length)
       .then(res => res.json())
       .then(lib => {
-        console.log(lib)
         setResult({ ...result, items: [...result.items, ...lib.items], })
       })
   }
 
-  const books = result.items?.map((bookInfo, index) => (
-    <Book volumeInfo={bookInfo.volumeInfo}
-      id={bookInfo.id} key={index} />
+  const books = result.items?.map(({ volumeInfo, id }, index) => (
+    <Book volumeInfo={volumeInfo} id={id} key={index} />
   ))
 
   return (
