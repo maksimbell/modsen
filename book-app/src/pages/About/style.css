@@ -16,7 +16,7 @@
   flex: 2;
   background-color: rgb(219, 219, 219);
   text-decoration: none;
-  color: black;
+  color: rgb(0, 0, 0);
   box-shadow: 5px 5px 5px rgb(57, 66, 70);
 }
 
@@ -26,7 +26,6 @@
   height: 280px;
   width: 180px;
   flex: 1;
-  /* opacity: 0.1; */
 }
 
 .About-main__content {

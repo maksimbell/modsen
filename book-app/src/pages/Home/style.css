@@ -28,7 +28,6 @@
 }
 
 .Home-main__content {
-  /* padding: 20px 0; */
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;

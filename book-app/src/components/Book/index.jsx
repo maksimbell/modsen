@@ -6,13 +6,13 @@ import './style.css';
 
 const Book = ({ volumeInfo, id }) => {
   const { imageLinks, categories, authors, title } = volumeInfo
+  const { thumbnail, smallThumbnail } = imageLinks
 
   return (
     <Link to={`books/${id}`} className="bookItem">
       <img
         className="bookItem__img"
-        src={imageLinks?.thumbnail ?
-          imageLinks?.smallThumbnail : defaultBook}
+        src={thumbnail ? smallThumbnail : defaultBook}
         alt={title} />
       <h5 className="bookItem__category">{categories?.[0]}</h5>
       <h5 className="bookItem__title">{title?.split(' ')

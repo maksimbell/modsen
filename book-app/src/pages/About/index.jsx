@@ -19,10 +19,6 @@ const About = (props) => {
       })
   }, [id])
 
-  useEffect(() => {
-    // console.log(book)
-  }, [book])
-
   return (
     <div className="About">
       <header className="About-header"></header>
