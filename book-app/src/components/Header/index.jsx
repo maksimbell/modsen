@@ -12,10 +12,8 @@ const {
 
 const Header = () => {
   const [query, setQuery] = useState('')
-  const [params, setParams] = useState({
-    filterId: 0,
-    sortingId: 0,
-  })
+  const [filterId, setFilter] = useState(0)
+  const [sortingId, setSort] = useState(0)
 
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -25,20 +23,13 @@ const Header = () => {
 
     if (params.query) {
       setQuery(params.query)
-      setParams({
-        filterId: +params.filterId,
-        sortingId: +params.sortingId
-      })
+      setFilter(+params.filterId)
+      setSort(+params.sortingId)
     }
-  }, [])
-
-  useEffect(() => {
-
-    if (query)
-      handleParamsChange({ query, ...params })
-  }, [params])
+  }, [searchParams])
 
   function handleParamsChange(params) {
+
     navigate({
       pathname: SEARCH.route,
       search: `${createSearchParams(params)}`,
@@ -46,11 +37,15 @@ const Header = () => {
   }
 
   function handleFilterChange(id) {
-    setParams({ ...params, filterId: id })
+    setFilter(id)
+    if (query)
+      handleParamsChange({ query, filterId: id, sortingId })
   }
 
   function handleSortingChange(id) {
-    setParams({ ...params, sortingId: id })
+    setSort(id)
+    if (query)
+      handleParamsChange({ query, filterId, sortingId: id })
   }
 
   function handleQueryChange(e) {
@@ -59,7 +54,7 @@ const Header = () => {
 
   function handleClick() {
     if (query)
-      handleParamsChange({ query, ...params })
+      handleParamsChange({ query, filterId, sortingId })
   }
 
   return (
@@ -67,9 +62,9 @@ const Header = () => {
       <SearchBar onChange={handleQueryChange} value={query} handleClick={handleClick} />
       <div className="headerSelects">
         <SearchSelect name={'Categories'} items={constants.CATEGORIES}
-          valueId={params.filterId} onChange={handleFilterChange} />
+          valueId={filterId} onChange={handleFilterChange} />
         <SearchSelect name={'Sorting by'} items={constants.SORTINGS}
-          valueId={params.sortingId} onChange={handleSortingChange} />
+          valueId={sortingId} onChange={handleSortingChange} />
       </div>
     </header>
   )
