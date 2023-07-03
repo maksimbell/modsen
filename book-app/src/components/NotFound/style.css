@@ -1,6 +1,6 @@
-.Blocked-info {
+.NotFound-info {
     position: relative; 
-    top: 270px;
+    top: 120px;
     display: inline-block;
     display: flex;
     gap: 10px;
@@ -8,6 +8,7 @@
     align-items: center;
 }
 
-.Blocked-info__description {
-    font-size: 20px;
+.NotFound-info__description {
+    font-size: 25px;
+    text-decoration: none;
 }

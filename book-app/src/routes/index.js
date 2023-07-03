@@ -7,4 +7,8 @@ export default Object.freeze({
         name: 'About',
         route: '/books/:id'
     },
+    NOTFOUND: {
+        name: 'NotFound',
+        route: '*'
+    },
 });

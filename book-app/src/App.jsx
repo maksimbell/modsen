@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { requestIpData } from '@api/ipDataAPI'
 import ErrorBoundary from '@components/ErrorBoundary'
 import BlockedInfo from '@components/BlockedInfo'
+import NotFound from '@components/NotFound'
 import Header from '@components/Header'
 import Home from '@pages/Home'
 import About from '@pages/About'
@@ -15,6 +16,7 @@ import './App.css'
 const {
   SEARCH,
   ABOUT,
+  NOTFOUND,
 } = routeConstants;
 
 const {
@@ -56,6 +58,7 @@ function App() {
               <Routes>
                 <Route exact path={SEARCH.route} element={<Home />} />
                 <Route exact path={ABOUT.route} element={<About />} />
+                <Route path={NOTFOUND.route} element={<NotFound />} />
               </Routes>
             </div>)
           ||
