@@ -6,13 +6,25 @@ import BlockedInfo from '@components/BlockedInfo'
 import Header from '@components/Header'
 import Home from '@pages/Home'
 import About from '@pages/About'
+import routeConstants from '@routes';
+import appState from './config'
 import { checkIpData } from './helpers/ipData'
-import { State } from './config'
 import { InfinitySpin } from 'react-loader-spinner'
 import './App.css'
 
+const {
+  SEARCH,
+  ABOUT,
+} = routeConstants;
+
+const {
+  VERIFY,
+  ACCESS,
+  BLOCK,
+} = appState;
+
 function App() {
-  const [state, setState] = useState(State.verify)
+  const [state, setState] = useState(VERIFY)
 
   useEffect(() => {
     setTimeout(handleIpData, 2000)
@@ -23,9 +35,9 @@ function App() {
       .then(res => res.json())
       .then(ipData => {
         if (checkIpData(ipData)) {
-          setState(State.access)
+          setState(ACCESS)
         } else {
-          setState(State.block)
+          setState(BLOCK)
         }
       })
   }
@@ -33,21 +45,21 @@ function App() {
   return (
     <div className="App">
       <ErrorBoundary fallback={<p>Something went wrong</p>}>
-        {(state === State.verify &&
+        {(state === VERIFY &&
           <div className="App-spin">
             <InfinitySpin width='200' color="#4fa94d" />
           </div>)
           ||
-          (state === State.access &&
+          (state === ACCESS &&
             <div>
               <Header />
               <Routes>
-                <Route exact path="/" element={<Home />} />
-                <Route exact path="/books/:id" element={<About />} />
+                <Route exact path={SEARCH.route} element={<Home />} />
+                <Route exact path={ABOUT.route} element={<About />} />
               </Routes>
             </div>)
           ||
-          (state === State.block &&
+          (state === BLOCK &&
             <BlockedInfo />)}
       </ErrorBoundary>
     </div>

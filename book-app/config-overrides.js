@@ -12,6 +12,7 @@ module.exports = function override(config) {
         '@constants': 'src/constants',
         '@components': 'src/components',
         '@api': 'src/api',
+        '@routes': 'src/routes',
     })(config);
 
     return config;
