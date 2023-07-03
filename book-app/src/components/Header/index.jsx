@@ -3,7 +3,12 @@ import { useNavigate, createSearchParams, useSearchParams } from "react-router-d
 import SearchBar from '@components/SearchBar'
 import SearchSelect from '@components/SearchSelect'
 import * as constants from '@constants'
+import routeConstants from '@routes';
 import './style.css';
+
+const {
+  SEARCH,
+} = routeConstants;
 
 const Header = () => {
   const [query, setQuery] = useState('')
@@ -35,7 +40,7 @@ const Header = () => {
 
   function handleParamsChange(params) {
     navigate({
-      pathname: '/',
+      pathname: SEARCH.route,
       search: `${createSearchParams(params)}`,
     })
   }
