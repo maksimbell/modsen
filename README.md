@@ -1,4 +1,4 @@
 Modsen practice
 
 book-app
-https://maksimbell.vercel.app/
+https://modsen-maksimbell.vercel.app/
