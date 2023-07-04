@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom';
-import { requestIpData } from './api/ipDataAPI'
+import { requestIpData } from './api/IpDataAPI'
 import ErrorBoundary from '@components/ErrorBoundary'
 import BlockedInfo from '@components/BlockedInfo'
 import NotFound from '@components/NotFound'
