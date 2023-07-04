@@ -6,7 +6,6 @@ import './style.css';
 
 const Book = ({ volumeInfo, id }) => {
   const { imageLinks, categories, authors, title } = volumeInfo
-  // const { thumbnail, smallThumbnail } = imageLinks
 
   const bookCategory = categories?.[0]
   const bookTitle = title?.split(' ')

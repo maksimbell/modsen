@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom';
-import { requestIpData } from './api/IpDataAPI'
+import { requestIpData } from './api/ipDataAPI'
 import ErrorBoundary from '@components/ErrorBoundary'
 import BlockedInfo from '@components/BlockedInfo'
 import NotFound from '@components/NotFound'
@@ -10,6 +10,7 @@ import About from '@pages/About'
 import routeConstants from '@routes';
 import appState from './config'
 import { checkIpData } from './helpers/ipData'
+import { delay } from './helpers/loader'
 import { InfinitySpin } from 'react-loader-spinner'
 import './App.css'
 
@@ -29,12 +30,14 @@ function App() {
   const [state, setState] = useState(VERIFY)
 
   useEffect(() => {
-    setTimeout(handleIpData, 2000)
+    handleIpData()
   }, [])
 
   function handleIpData() {
-    requestIpData()
-      .then(res => res.json())
+    Promise.allSettled([
+      delay(),
+      requestIpData()
+    ]).then(([_, { value: res }]) => res.json())
       .then(ipData => {
         if (checkIpData(ipData)) {
           setState(ACCESS)
